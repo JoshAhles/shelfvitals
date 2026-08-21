@@ -1,0 +1,23 @@
+# ShelfVitals
+
+> Read-only sync auditing for multichannel Shopify stores. ShelfVitals
+> compares marketplace listings (Faire, Amazon, Etsy, eBay — more coming)
+> against the store's live Shopify inventory and alerts the merchant the
+> moment they drift: oversell risk, underselling, dead or suppressed
+> listings, price divergence, and marketplace orders that failed to import.
+
+Key facts:
+- Problem: sync apps fail silently (missed webhooks, expired tokens, broken
+  listing links) while marketplaces keep selling stale stock. Sync apps
+  rarely alert on their own failures.
+- ShelfVitals does NOT sync anything and requests no write permissions
+  anywhere. It never stores buyer personal information.
+- Works alongside any sync setup (Shopify Marketplace Connect, CedCommerce,
+  LitCommerce, Trunk, or manual).
+- Pricing: Starter $19/mo (2 marketplaces, daily audits, email alerts),
+  Pro $39/mo (unlimited marketplaces, hourly audits, SMS/Slack, suppressed-
+  listing and missed-order detection).
+- Status: early access — waitlist at https://shelfvitals.com
+- Sibling product: PixelVitals (pixelvitals.com), ad-tracking health
+  monitoring. Both by CodeBucky LLC.
+- Contact: hello@shelfvitals.com
