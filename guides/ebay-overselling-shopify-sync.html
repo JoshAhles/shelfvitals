@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>eBay Keeps Overselling Your Shopify Stock? Causes and the Fix (2026)</title>
+<meta name="description" content="eBay selling items that are out of stock in Shopify? Why sync apps oversell silently, how to find drifted listings with a 20-minute CSV reconcile, and how to protect your seller metrics.">
+<link rel="canonical" href="https://shelfvitals.com/guides/ebay-overselling-shopify-sync">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article",
+ "headline":"eBay Keeps Overselling Your Shopify Stock: Causes and Fixes",
+ "datePublished":"2026-08-20","dateModified":"2026-08-20",
+ "author":{"@type":"Organization","name":"ShelfVitals","url":"https://shelfvitals.com"},
+ "publisher":{"@type":"Organization","name":"ShelfVitals"}}
+</script>
+<style>
+:root{--paper:#F7F3EA;--card:#FFFDF7;--ink:#211D15;--muted:#6E685B;--line:#E4DCC9;--accent:#E8442A;--accent-deep:#C33619;--ok:#1E7A4F}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.75 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-deep)}
+main{max-width:720px;margin:0 auto;padding:56px 24px 90px}
+h1,h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:clamp(2rem,5.4vw,3.1rem);margin:18px 0 10px}
+h2{font-size:1.5rem;margin:44px 0 12px}
+p,li{color:#3B362B}
+.meta{font:500 12.5px "IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.crumb{font:500 13px "IBM Plex Mono",monospace}
+ol,ul{padding-left:1.3em}
+li{margin:10px 0}
+code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--card);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+.callout{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;padding:22px 24px;margin:36px 0;box-shadow:5px 5px 0 var(--ink)}
+.cta{background:var(--ink);color:var(--paper);border-radius:14px;padding:30px;margin-top:56px}
+.cta h2{margin:0 0 10px;color:var(--paper)}
+.cta p{color:#B9B29D}
+.btn{display:inline-block;background:var(--accent);color:#FFF6F0;font:600 15.5px "Instrument Sans",sans-serif;padding:13px 26px;border-radius:99px;margin-top:18px;text-decoration:none}
+footer{max-width:720px;margin:0 auto;padding:0 24px 48px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<a class="crumb" href="/">← shelfvitals.com</a>
+<p class="meta" style="margin-top:34px">Guide · Updated August 2026</p>
+<h1>eBay keeps overselling stock you don't have</h1>
+<p>An oversell on eBay is triple damage: the refund, the angry buyer, and a <strong>transaction defect</strong> that erodes your seller standing — lose enough and you lose Promoted Listings eligibility or Top Rated status. If your Shopify↔eBay sync keeps letting it happen, here's the diagnosis path.</p>
+
+<h2>Find the drifted listings first</h2>
+<ol>
+<li>In eBay Seller Hub → Listings → Active, export to CSV (SKU + available quantity).</li>
+<li>In Shopify, export products with inventory quantities.</li>
+<li>Match on SKU. Every row where <code>eBay qty &gt; Shopify qty</code> is a live oversell risk — fix those listings <em>by hand, today</em>, before touching the sync app.</li>
+</ol>
+
+<h2>Why sync apps oversell silently</h2>
+<ul>
+<li><strong>Missed inventory webhooks.</strong> Most connectors update eBay when Shopify fires an inventory-change event. Miss one (app downtime, rate limits, a platform hiccup) and that SKU is stale forever — unless the app runs full reconciliation sweeps. Many don't.</li>
+<li><strong>Revise-listing failures.</strong> The app sends the update; eBay rejects it (listing under offer, category rule, API error); the app doesn't retry or surface it. Its log says "sent," eBay still shows 4.</li>
+<li><strong>Out-of-stock control masking zeroes.</strong> eBay's out-of-stock setting keeps listings alive at quantity 0 — a good feature that, combined with a partial sync, can leave the <em>displayed</em> quantity stale.</li>
+<li><strong>Restock races.</strong> Restocking in Shopify while the app is mid-sync can re-push the pre-restock state; several popular connectors' review pages are full of exactly this.</li>
+<li><strong>Duplicate or orphaned listings.</strong> Relisted items and eBay-side edits break SKU mapping; the orphan keeps selling against a number nobody updates.</li>
+</ul>
+
+<h2>Protect your metrics while you fix it</h2>
+<p>If an oversell already happened: cancelling with reason "out of stock" is what creates the defect — contacting the buyer first so <em>they</em> cancel, or fulfilling from anywhere at almost any cost, is usually cheaper than the metric damage. Then reconcile the full export above rather than trusting the app's dashboard.</p>
+
+<div class="callout"><strong>The uncomfortable truth:</strong> your sync app's dashboard is the last place its failure shows up — reporting its own failure indicts its own product. An independent check (the CSV match above) is the only view with no conflict of interest.</div>
+
+<h2>Make the check automatic</h2>
+<p>The CSV reconcile takes 20 minutes, and most sellers only do it after being burned. Doing it daily is the difference between catching drift in hours and eating defects for weeks.</p>
+
+<div class="cta">
+  <h2>Or let ShelfVitals watch it for you</h2>
+  <p>ShelfVitals is a read-only auditor: it continuously compares your marketplace listings against your actual Shopify inventory — quantities, prices, listing status, order imports — and alerts you the moment anything drifts. It syncs nothing and changes nothing; it just refuses to take your sync app's word for it.</p>
+  <a class="btn" href="/#early">Get early access — $19/mo locked for life</a>
+</div>
+</main>
+<footer>© 2026 CodeBucky LLC · <a href="/">shelfvitals.com</a> · <a href="#" class="em" data-u="hello" data-d="shelfvitals.com"></a></footer>
+<script>document.querySelectorAll('.em').forEach(a=>{const e=a.dataset.u+'@'+a.dataset.d;a.href='mai'+'lto:'+e;a.textContent=e});</script>
+</body>
+</html>

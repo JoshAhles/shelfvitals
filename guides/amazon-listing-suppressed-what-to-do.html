@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amazon Listing Suppressed or Search-Suppressed? Find It Fast, Fix It Faster (2026)</title>
+<meta name="description" content="Amazon listings go inactive or search-suppressed with no email. Where suppressions hide in Seller Central, common causes for Shopify multichannel sellers, and how to catch them same-day.">
+<link rel="canonical" href="https://shelfvitals.com/guides/amazon-listing-suppressed-what-to-do">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article",
+ "headline":"Amazon Listing Suppressed: Find It Fast, Fix It Faster",
+ "datePublished":"2026-08-20","dateModified":"2026-08-20",
+ "author":{"@type":"Organization","name":"ShelfVitals","url":"https://shelfvitals.com"},
+ "publisher":{"@type":"Organization","name":"ShelfVitals"}}
+</script>
+<style>
+:root{--paper:#F7F3EA;--card:#FFFDF7;--ink:#211D15;--muted:#6E685B;--line:#E4DCC9;--accent:#E8442A;--accent-deep:#C33619;--ok:#1E7A4F}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.75 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-deep)}
+main{max-width:720px;margin:0 auto;padding:56px 24px 90px}
+h1,h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:clamp(2rem,5.4vw,3.1rem);margin:18px 0 10px}
+h2{font-size:1.5rem;margin:44px 0 12px}
+p,li{color:#3B362B}
+.meta{font:500 12.5px "IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.crumb{font:500 13px "IBM Plex Mono",monospace}
+ol,ul{padding-left:1.3em}
+li{margin:10px 0}
+code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--card);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+.callout{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;padding:22px 24px;margin:36px 0;box-shadow:5px 5px 0 var(--ink)}
+.cta{background:var(--ink);color:var(--paper);border-radius:14px;padding:30px;margin-top:56px}
+.cta h2{margin:0 0 10px;color:var(--paper)}
+.cta p{color:#B9B29D}
+.btn{display:inline-block;background:var(--accent);color:#FFF6F0;font:600 15.5px "Instrument Sans",sans-serif;padding:13px 26px;border-radius:99px;margin-top:18px;text-decoration:none}
+footer{max-width:720px;margin:0 auto;padding:0 24px 48px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<a class="crumb" href="/">← shelfvitals.com</a>
+<p class="meta" style="margin-top:34px">Guide · Updated August 2026</p>
+<h1>Amazon suppressed your listing — and didn't tell you</h1>
+<p>Suppressed listings are the quietest revenue leak on Amazon: the ASIN drops out of search or goes inactive, sales flatline to zero, and Amazon doesn't reliably notify you. Multichannel sellers feel it worst — with orders still flowing from Shopify and other channels, one channel going dark blends into the daily noise.</p>
+
+<h2>Where suppressions actually show up</h2>
+<ol>
+<li><strong>Seller Central → Inventory → Manage All Inventory</strong> — check the status column for Inactive.</li>
+<li><strong>The "Fix Your Products" view</strong> — search-suppressed and at-risk listings live here, often without any notification ever sent. If you've never opened it, open it today; most sellers find something they didn't know was dark.</li>
+<li><strong>Account Health</strong> — policy-driven deactivations (pricing errors, compliance documents, restricted keywords).</li>
+</ol>
+
+<h2>Common causes for Shopify multichannel sellers</h2>
+<ul>
+<li><strong>Feed/connector overwrites.</strong> Your sync app pushes a title, image, or attribute that violates a category style rule (image background, title length, prohibited terms) — Amazon suppresses rather than rejects, and the connector reports success.</li>
+<li><strong>Missing required attributes</strong> after a category schema change — Amazon periodically adds required fields, and existing listings get suppressed until they're filled.</li>
+<li><strong>Pricing-error suppression</strong> — a Shopify-driven price update trips Amazon's fair-pricing checks (often a currency or per-unit mistake introduced by the connector).</li>
+<li><strong>Expired compliance documents</strong> on regulated categories.</li>
+<li><strong>Variation family breaks</strong> — a connector re-pushing parentage can orphan child ASINs; orphans go inactive.</li>
+</ul>
+
+<h2>Fix path</h2>
+<ol>
+<li>In Fix Your Products, every suppressed ASIN names its specific issue — fix the attribute, image, or price it names, resubmit, and status usually recovers in hours.</li>
+<li>If the cause was your connector's feed, fix it at the source (Shopify data or connector mapping) — otherwise the suppression boomerangs on the next sync.</li>
+<li>For policy deactivations, Account Health has the appeal path — respond with exactly the document or correction it names, factually and fast.</li>
+</ol>
+
+<div class="callout"><strong>The real cost is detection time.</strong> A suppressed ASIN found same-day is a two-hour fix. Found after three weeks, it's three weeks of zero sales, dead ranking momentum, and stale inventory decisions layered on top.</div>
+
+<h2>Catching it same-day, automatically</h2>
+<p>The manual habit — checking Fix Your Products daily — works and costs minutes. Until the day you skip it.</p>
+
+<div class="cta">
+  <h2>Or let ShelfVitals watch it for you</h2>
+  <p>ShelfVitals is a read-only auditor: it continuously compares your marketplace listings against your actual Shopify inventory — quantities, prices, listing status, order imports — and alerts you the moment anything drifts. It syncs nothing and changes nothing; it just refuses to take your sync app's word for it.</p>
+  <a class="btn" href="/#early">Get early access — $19/mo locked for life</a>
+</div>
+</main>
+<footer>© 2026 CodeBucky LLC · <a href="/">shelfvitals.com</a> · <a href="#" class="em" data-u="hello" data-d="shelfvitals.com"></a></footer>
+<script>document.querySelectorAll('.em').forEach(a=>{const e=a.dataset.u+'@'+a.dataset.d;a.href='mai'+'lto:'+e;a.textContent=e});</script>
+</body>
+</html>

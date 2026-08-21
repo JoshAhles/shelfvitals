@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopify and Etsy Inventory Not Syncing? Diagnose It in 15 Minutes (2026)</title>
+<meta name="description" content="Etsy showing stock you don't have, or Etsy orders not arriving in Shopify? How to diagnose a broken Shopify-Etsy sync, fix each cause, and catch the next silent failure early.">
+<link rel="canonical" href="https://shelfvitals.com/guides/shopify-etsy-inventory-not-syncing">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article",
+ "headline":"Shopify and Etsy Inventory Not Syncing: Diagnosis and Fixes",
+ "datePublished":"2026-08-20","dateModified":"2026-08-20",
+ "author":{"@type":"Organization","name":"ShelfVitals","url":"https://shelfvitals.com"},
+ "publisher":{"@type":"Organization","name":"ShelfVitals"}}
+</script>
+<style>
+:root{--paper:#F7F3EA;--card:#FFFDF7;--ink:#211D15;--muted:#6E685B;--line:#E4DCC9;--accent:#E8442A;--accent-deep:#C33619;--ok:#1E7A4F}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.75 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-deep)}
+main{max-width:720px;margin:0 auto;padding:56px 24px 90px}
+h1,h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:clamp(2rem,5.4vw,3.1rem);margin:18px 0 10px}
+h2{font-size:1.5rem;margin:44px 0 12px}
+p,li{color:#3B362B}
+.meta{font:500 12.5px "IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.crumb{font:500 13px "IBM Plex Mono",monospace}
+ol,ul{padding-left:1.3em}
+li{margin:10px 0}
+code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--card);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+.callout{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;padding:22px 24px;margin:36px 0;box-shadow:5px 5px 0 var(--ink)}
+.cta{background:var(--ink);color:var(--paper);border-radius:14px;padding:30px;margin-top:56px}
+.cta h2{margin:0 0 10px;color:var(--paper)}
+.cta p{color:#B9B29D}
+.btn{display:inline-block;background:var(--accent);color:#FFF6F0;font:600 15.5px "Instrument Sans",sans-serif;padding:13px 26px;border-radius:99px;margin-top:18px;text-decoration:none}
+footer{max-width:720px;margin:0 auto;padding:0 24px 48px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<a class="crumb" href="/">← shelfvitals.com</a>
+<p class="meta" style="margin-top:34px">Guide · Updated August 2026</p>
+<h1>Shopify &amp; Etsy inventory not syncing? Diagnose it in 15 minutes</h1>
+<p>The nasty thing about a broken Shopify↔Etsy sync is that nothing announces it. The connector app still says "connected," Etsy keeps selling, and you find out from an order you can't fulfill. Here's a fast way to establish what's actually broken, the usual causes, and how to stop being the last to know.</p>
+
+<h2>Step 1: Spot-check five SKUs by hand</h2>
+<ol>
+<li>Pick five products you sell on both channels — include your two best sellers (they drift most, because they change most).</li>
+<li>Open each in Shopify admin (actual available quantity) and on Etsy (listing quantity). Write both numbers down.</li>
+<li>Any mismatch on current stock = live drift. Etsy higher than Shopify = <strong>oversell risk right now</strong>. Etsy lower = you're silently underselling.</li>
+</ol>
+
+<h2>Step 2: Check the order pipeline, not just inventory</h2>
+<p>Inventory drift and order-import failure are different breaks with different fixes. In Etsy: Shop Manager → Orders. In Shopify: Orders (filtered to your Etsy integration's channel or tag). Every recent Etsy order should exist in Shopify within minutes. Missing orders mean the import leg is down — which also silently breaks any fulfillment automation (Printify and similar) hanging off Shopify.</p>
+
+<h2>The usual causes, in order of likelihood</h2>
+<ul>
+<li><strong>The connector silently lost auth.</strong> Etsy API tokens and permissions expire or get invalidated (password changes, Etsy API policy updates). Most connectors keep showing "connected" from cached state. Fix: disconnect and reconnect the integration with the shop-owner account.</li>
+<li><strong>Etsy API changes broke the app.</strong> Etsy has repeatedly tightened its API, and older connectors degrade <em>partially</em> — inventory keeps syncing while orders stop, or vice versa. Check the app's changelog, then its recent reviews: if the last 30 days of reviews describe your exact problem, it's them, not you.</li>
+<li><strong>SKU/variant mapping broke.</strong> Renamed variants, edited SKUs, or relisted items orphan the link between a Shopify variant and an Etsy listing. Orphans stop updating but stay live on Etsy — the classic source of "it sold on Etsy but Shopify said 0."</li>
+<li><strong>Location mismatches.</strong> Multi-location Shopify inventory (or a connector syncing only one location) sends Etsy a number that's real but wrong.</li>
+<li><strong>Sync queue stalled.</strong> Some connectors batch updates; a stalled queue means everything works — hours late. At best-seller speed that's enough to oversell.</li>
+</ul>
+
+<div class="callout"><strong>Rule of thumb:</strong> the damage isn't the break, it's the <em>time to discovery</em>. A sync that broke this morning costs an apology. A sync that broke two weeks ago costs refunds, Etsy customer-service stats, and review damage.</div>
+
+<h2>How to catch the next one early</h2>
+<p>Once fixed, the reliable habit is a daily reconcile: export Shopify quantities for your shared SKUs, compare against Etsy's, and eyeball recent Etsy orders against Shopify. Fifteen minutes a day, forever — or automate exactly that comparison.</p>
+
+<div class="cta">
+  <h2>Or let ShelfVitals watch it for you</h2>
+  <p>ShelfVitals is a read-only auditor: it continuously compares your marketplace listings against your actual Shopify inventory — quantities, prices, listing status, order imports — and alerts you the moment anything drifts. It syncs nothing and changes nothing; it just refuses to take your sync app's word for it.</p>
+  <a class="btn" href="/#early">Get early access — $19/mo locked for life</a>
+</div>
+</main>
+<footer>© 2026 CodeBucky LLC · <a href="/">shelfvitals.com</a> · <a href="#" class="em" data-u="hello" data-d="shelfvitals.com"></a></footer>
+<script>document.querySelectorAll('.em').forEach(a=>{const e=a.dataset.u+'@'+a.dataset.d;a.href='mai'+'lto:'+e;a.textContent=e});</script>
+</body>
+</html>
